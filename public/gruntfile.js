@@ -1,4 +1,3 @@
-'use strict';
 module.exports = function(grunt){
 	grunt.initConfig({
 		pkg:grunt.file.readJSON('package.json'),
@@ -9,10 +8,6 @@ module.exports = function(grunt){
 			all:[
 				'Gruntfile.js',
 				'assets/js/*.js',
-				'assets/js/models/*.js',
-				'assets/js/views/*.js',
-				'assets/js/collections/*.js',
-				'assets/js/routers/*.js',
 				'!assets/js/scripts.min.js'
 			]
 		},
@@ -34,19 +29,8 @@ module.exports = function(grunt){
 		uglify:{
 			dist:{
 				files:{
-					'assets/js/plugins/bootstrap.min.js':[
-						'assets/js/plugins/bootstrap/transition.js',
-			            'assets/js/plugins/bootstrap/alert.js',
-			            'assets/js/plugins/bootstrap/button.js',
-			            'assets/js/plugins/bootstrap/carousel.js',
-			            'assets/js/plugins/bootstrap/collapse.js',
-			            'assets/js/plugins/bootstrap/dropdown.js',
-			            'assets/js/plugins/bootstrap/modal.js',
-			            'assets/js/plugins/bootstrap/tooltip.js',
-			            'assets/js/plugins/bootstrap/popover.js',
-			            'assets/js/plugins/bootstrap/scrollspy.js',
-			            'assets/js/plugins/bootstrap/tab.js',
-			            'assets/js/plugins/bootstrap/affix.js'
+					'assets/js/scripts.min.js':[
+					'assets/js/main.js'
 					]
 				},
 				options: {
