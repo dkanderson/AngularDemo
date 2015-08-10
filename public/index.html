@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="todoApp">
 <head>
-	<title>First Test</title>
+	<title>Todo App</title>
 	<link href="assets/css/main.min.css" rel="stylesheet">
 </head>
-<body>
-	<section id="wrapper" ng-app="ToDoList">
+<body ng-controller="todoCtrl">
+	<section id="wrapper">
         <div class="container-fluid">
             <header>
                 <nav class="main-nav navbar navbar-default" role="navigation">
@@ -49,9 +49,9 @@
             </header>
             <div class="row">
                 <div class="jumbotron">
-                  <h1>No Active Tasks</h1>
+                  <h1>{{todo.user}} has {{incompleteCount()}} Tasks</h1>
                 </div>
-                <div class="table-wrap table-responsive" ng-controller="todoCtrl as todo">
+                <div class="table-wrap table-responsive">
                     <div class="btn-group filter-nav">
                         <button type="button" id="addNew" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add New</button>
                         <div class="btn-group">
@@ -78,31 +78,33 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th><span class="glyphicon glyphicon-time"></span> Date</th>
-                                <th><span class="glyphicon glyphicon-calendar"></span> Time</th>
+                                <!-- <th><span class="glyphicon glyphicon-time"></span> Date</th>
+                                <th><span class="glyphicon glyphicon-calendar"></span> Time</th> -->
                                 <th><span class="glyphicon glyphicon-info-sign"></span> Description</th>
-                                <th><span class="glyphicon glyphicon-map-marker"></span> Location</th>
-                                <th><span class="glyphicon glyphicon-eye-open"></span> Privacy</th>
-                                <th><span class="glyphicon glyphicon-asterisk"></span> Status</th>
-                                <th><span class="glyphicon glyphicon-cog"></span> Actions</th>
+                                <!-- <th><span class="glyphicon glyphicon-map-marker"></span> Location</th> -->
+                                <th style="text-align:center;width:100px"><span class="glyphicon glyphicon-eye-open"></span> Done?</th>
+                                <th style="text-align:center;width:100px"><span class="glyphicon glyphicon-asterisk"></span> Status</th>
+                                <!-- <th><span class="glyphicon glyphicon-cog"></span> Actions</th> -->
                             </tr>
                         </thead>
                         <tbody id="assignment_list">
                             <!--- load templates -->
                             <!-- Begin Assign View -->
-							<td>{{date}}</td>
-							<td>{{time}}</td>
-							<td class="assgn-description"><p>{{description}}</p></td>
-							<td>{{location}}</td>
-							<td>{{privacy isprivate}}</td>
-							<td>{{status}}</td><!-- /Assign View -->
-							<td>
-							    <div class="btn-group">
-							      <button type="button" class="btn btn-success btn-default edit" data-toggle="modal" data-target=".add-new"><span class="glyphicon glyphicon-edit"></span> </button>
-							      <button type="button" class="btn btn-danger btn-default trash"><span class="glyphicon glyphicon-trash"></span> </button>
-							      <button type="button" class="btn btn-primary btn-default share"><span class="glyphicon glyphicon-share"></span> </button>
-							    </div>
-							</td>
+							<tr ng-repeat="item in todo.items">
+                               <!-- <td>{{item.date}}</td>
+                                <td>{{item.time}}</td> -->
+                                <td class="assgn-description" style="width:80%"><p>{{item.description}}</p></td>
+                                <!-- <td>{{item.location}}</td> -->
+                                <td style="text-align:center;width:10%">{{item.status}}</td>
+                                <td style="text-align:center;width:10%"><input type="checkbox" ng-model="item.status"></td><!-- /Assign View -->
+                                <!-- <td>
+                                    <div class="btn-group">
+                                      <button type="button" class="btn btn-success btn-default edit" data-toggle="modal" data-target=".add-new"><span class="glyphicon glyphicon-edit"></span> </button>
+                                      <button type="button" class="btn btn-danger btn-default trash"><span class="glyphicon glyphicon-trash"></span> </button>
+                                      <button type="button" class="btn btn-primary btn-default share"><span class="glyphicon glyphicon-share"></span> </button>
+                                    </div>
+                                </td>  -->
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -110,8 +112,9 @@
         </section>
         <footer>
         </footer>
-	<script src="bower_components/angular/angular.js"></script>
-	<script src="js/scripts.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+	<script src="assets/js/main.js"></script>
 </body>
 
 </html>
