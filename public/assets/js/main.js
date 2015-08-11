@@ -1,9 +1,10 @@
 var model = {
-	user: 'John',
-	items: [{"_id":"53b06b13d468f12502000002","title":"Dinner","description":"Cook curry chicken","date":"06/29/2014","time":"02:30 PM","location":"kitchen","assignees":["Jane Doe"],"done":"true","status":false},{"_id":"53e3fb18ea77d2621f000001","title":"Fix todo bugs","description":"Complete application","date":"08/07/2014","time":"06:15 PM","location":"Home","assignees":["Jane Doe"],"done":"true","status":false},{"_id":"540e951f051892a315000001","title":"Just a test","description":"Lets see what happens","date":"09/10/2014","time":"03:50 AM","location":"Somewhere out there","assignees":["Jane Doe"],"done":"true","status":false},{"_id":"546a6df21c1bc1ec01000001","title":"Test","description":"something","date":"11/20/2014","time":"05:00 AM","location":"somewhere","assignees":null,"done":"true","status":false}]
+	user: 'John'
 };
 
 var app = angular.module('todoApp', ['ui.router']);
+
+app.constant('taskList', 'http://localhost:9000/tasks');
 
 // app.config(function($stateProvider){
 // 	$stateProvider.state('todo', {
@@ -13,28 +14,59 @@ var app = angular.module('todoApp', ['ui.router']);
 // 	});
 // });
 
-app.controller('todoCtrl', function todoctrl($scope) {
+app.controller('todoCtrl', function todoctrl($scope, $http, taskList) {
 	$scope.todo = model;
+	$scope.tasks = {};
+
+	$http.get(taskList).
+		success(function(data){
+			$scope.tasks.items = data;
+		}).
+		error(function(error) {
+			$scope.tasks.error = error;
+		});
 
 	$scope.incompleteCount = function incompleteCount(){
 		var count = 0;
 
-		angular.forEach($scope.todo.items, function(item){
+		angular.forEach($scope.tasks.items, function(item){
 			if(!item.status){ count += 1; }
 		});
 
 		return count;
 	};
 
-	$scope.addNew = function addNew(){
-
+	$scope.addNew = function addNew(new_task){
+		var data = {description:new_task, status:false};
+		$scope.tasks.items.push(data);
+		$http.post(taskList, data).
+			then(function(data){
+				alert('db updated');
+			},
+			function(error){
+				alert('epic Fail');
+			});
 	};
 });
+
+app.filter('checkedItems', function() {
+	return function(items, showCompleted){
+		var resultsArr = [];
+		angular.forEach(items, function(item){
+			if(item.status === false || showCompleted === true){
+				resultsArr.push(item);
+			}
+		});
+		return resultsArr;
+	};
+});
+
+
 
 app.directive('addnew', function(){
 	return {
 		restrict: 'E',
 		scope: {},
-		
+
 	};
 });

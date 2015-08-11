@@ -55,12 +55,6 @@ module.exports = function(grunt){
 				'<%= jshint.all %>'
 				],
 				tasks:['jshint', 'uglify']
-			},
-			html:{
-				files:[
-				'*.html'
-				],
-				tasks:['livereload']
 			}
 		},
 		livereload:{

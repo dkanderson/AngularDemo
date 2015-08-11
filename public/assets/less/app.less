@@ -17,8 +17,11 @@ body {
    ========================================================================== */
 
 #wrapper{
-   padding: 20px;
-   margin:40px 0;
+   padding: 5px;
+   margin:5px 0;
+   .table-wrap{
+      padding: 0 5px;
+   }
    .container-fluid{
       background:#fff;
       box-shadow: 1px 1px 1px rgba(0,0,0, .15);
@@ -44,6 +47,9 @@ body {
 .filter-nav{
    margin-bottom:20px;
 }
+.controls-wrapper{
+   padding-top:20px;
+}
 
 /* ==========================================================================
    Content
@@ -59,6 +65,9 @@ body {
 }
 .modal-form-wrap{
    margin-right:40px;
+}
+.show-completed{
+   margin-top: 10px;
 }
 
 /* ==========================================================================
@@ -118,6 +127,17 @@ figure.alignnone { margin-left: 0; margin-right: 0; }
 
 @media (min-width: @screen-sm-min) { }
 
-@media (min-width: @screen-md-min) { }
+@media (min-width: @screen-md-min) { 
+   #wrapper{
+      padding: 20px;
+      margin:40px 0;
+      .table-wrap{
+         padding: 0 40px;
+      }
+   }
+   
+}
 
-@media (min-width: @screen-lg-min) { }
+@media (min-width: @screen-lg-min) {
+
+}
