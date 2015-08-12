@@ -1,5 +1,5 @@
 var model = {
-	user: 'John'
+	user: 'Duane'
 };
 
 var app = angular.module('todoApp', ['ui.router']);
@@ -38,10 +38,10 @@ app.controller('todoCtrl', function todoctrl($scope, $http, taskList) {
 
 	$scope.addNew = function addNew(new_task){
 		var data = {description:new_task, status:false};
-		$scope.tasks.items.push(data);
+		
 		$http.post(taskList, data).
 			then(function(data){
-				alert('db updated');
+				$scope.tasks.items.push(data.config.data);
 			},
 			function(error){
 				alert('epic Fail');

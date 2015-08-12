@@ -1,12 +1,15 @@
 var express = require('express'),
     path = require('path'),
     http = require('http'),
-    assmt = require('./routes/tasks');
+    assmt = require('./routes/tasks'),
+    bodyParser = require('body-parser');
 
 var app = express();
 
 
 app.set('port', process.env.PORT || 9000);
+// app.use(express.logger('dev'));  /* 'default', 'short', 'tiny', 'dev' */
+app.use(bodyParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/tasks', assmt.findAll);
